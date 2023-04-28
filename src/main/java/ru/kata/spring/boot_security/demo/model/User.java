@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,24 +17,22 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
+    @Column
     private String name;
-    @Column(name = "surname")
+    @Column
     private String surname;
-    @Column(name = "password")
+    @Column
     private String password;
 
     public User() {
     }
 
-    public User(int id, String name, String surname) {
-        this.id = id;
+    public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
 
-    public User(int id, String name, String surname, String password) {
-        this.id = id;
+    public User(String name, String surname, String password) {
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -42,7 +41,7 @@ public class User implements UserDetails {
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public int getId() {
         return id;
@@ -81,8 +80,8 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role role) {
+        this.roles.add(role);
     }
 
     @Override
