@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo;
+package ru.kata.spring.boot_security.demo.Util;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -8,11 +8,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.model.Role;
 
 @Component
-public class createUser implements CommandLineRunner {
+public class CreateUser implements CommandLineRunner {
     private final UserService userService;
     private final RoleService roleService;
 
-    public createUser(UserService userService, RoleService roleService) {
+    public CreateUser(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
