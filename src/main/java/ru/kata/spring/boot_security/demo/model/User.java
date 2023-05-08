@@ -22,19 +22,26 @@ public class User implements UserDetails {
     @Column
     private String surname;
     @Column
+    private int age;
+    @Column
+    private String email;
+    @Column
     private String password;
 
     public User() {
     }
 
-    public User(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
     public User(String name, String surname, String password) {
         this.name = name;
         this.surname = surname;
+        this.password = password;
+    }
+
+    public User(String name, String surname, int age, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.email = email;
         this.password = password;
     }
 
@@ -67,7 +74,23 @@ public class User implements UserDetails {
         this.surname = surname;
     }
 
+    public int getAge() {
+        return age;
+    }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
@@ -80,8 +103,12 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Role role) {
+    public void setRole(Role role) {
         this.roles.add(role);
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -91,7 +118,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override
@@ -130,9 +157,13 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", family='" + surname + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

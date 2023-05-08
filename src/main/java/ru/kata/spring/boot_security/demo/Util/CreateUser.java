@@ -23,14 +23,14 @@ public class CreateUser implements CommandLineRunner {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");
         // логин = user пароль = user
-        User user1 = new User("user", "surname", "$2a$12$CSzw14uSo5EiEHW8dHGK0OHZhOT4iMrHh8eowb.s38VC/0BHvu.t6");
+        User user1 = new User("user", "surname", 25, "user@mail.ru", "user");
         // логин = admin пароль = admin
-        User admin1 = new User("admin", "surname", "$2a$12$dqBIUBZcU31H3XOuGaLkU.i4PjF9Ss2EE7xco9hElWCvLWb/OLDHe");
+        User admin1 = new User("admin", "surname", 26, "admin@mail.ru", "admin");
         roleService.saveRole(roleUser);
         roleService.saveRole(roleAdmin);
-        user1.setRoles(roleUser);
-        admin1.setRoles(roleAdmin);
-        admin1.setRoles(roleUser);
+        user1.setRole(roleUser);
+        admin1.setRole(roleAdmin);
+        admin1.setRole(roleUser);
         userService.saveUsers(user1);
         userService.saveUsers(admin1);
     }

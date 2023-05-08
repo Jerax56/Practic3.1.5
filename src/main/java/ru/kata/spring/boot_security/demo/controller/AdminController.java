@@ -5,52 +5,47 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.security.Principal;
 
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    private UserService userService;
+    public AdminController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     @GetMapping()
-    public String getUsers(Model model) {
-        model.addAttribute("admin", userService.getUsers());
+    public String mainPage(Model model, Principal principal) {
+        model.addAttribute("authUser", userService.getUserByName(principal.getName()));
+        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin";
     }
 
-    @GetMapping(value = "/addNewUser")
-    public String addNewUser(Model model) {
-        model.addAttribute("newUser", new User());
-        return "user-info";
-    }
-
-    @PostMapping(value = "/saveUser")
-    public String saveUser(@ModelAttribute("newUser") User user) {
-        if (user.getId() == 0) {
-            userService.saveUsers(user);
-        } else {
-            userService.updateUser(user);
-        }
+    @PostMapping("")
+    public String save(@ModelAttribute("user") User user) {
+        userService.saveUsers(user);
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/updateUser")
-    public String getUserById(@RequestParam("id") int id, Model model) {
-        model.addAttribute("newUser", userService.getUser(id));
-        return "user-info";
-    }
-
-    @PatchMapping(value = "/updateUser")
-    public String updateUser(@RequestParam("id") int id, @RequestBody User user) {
-        userService.updateUser(user);
+    @PatchMapping("/update/{id}")
+    public String update(@PathVariable("id") int id, @ModelAttribute("user") User theuser) {
+        userService.updateUser(theuser);
         return "redirect:/admin";
     }
 
-    @DeleteMapping(value = "/deleteUser")
-    public String deleteUser(@RequestParam("id") int id) {
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
