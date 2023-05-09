@@ -24,7 +24,7 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String mainPage(Model model, Principal principal) {
+    public String adminPage(Model model, Principal principal) {
         model.addAttribute("authUser", userService.getUserByName(principal.getName()));
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("newUser", new User());
@@ -33,19 +33,19 @@ public class AdminController {
     }
 
     @PostMapping("")
-    public String save(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUsers(user);
         return "redirect:/admin";
     }
 
     @PatchMapping("/update/{id}")
-    public String update(@PathVariable("id") int id, @ModelAttribute("user") User theuser) {
-        userService.updateUser(theuser);
+    public String updateUser(@PathVariable("id") int id, @ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
