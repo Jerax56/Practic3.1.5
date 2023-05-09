@@ -27,7 +27,7 @@
 
 <div class="row">
     <div class="col-2">
-        <! Кнопки User, Admin>
+        <!-- Кнопки User, Admin-->
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <br>
             <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab"
@@ -50,7 +50,7 @@
                        aria-controls="nav-profile" aria-selected="false">New user</a>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                    <! Таблица пользователей>
+                    <!-- Таблица пользователей-->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="card">
                             <div class="card-header">
@@ -58,7 +58,6 @@
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped">
-                                    <!--- column names --->
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -79,7 +78,7 @@
                                         <td th:text="${user.getAge()}"></td>
                                         <td th:text="${user.getEmail()}"></td>
                                         <td th:text="${user.getRoles().toString().replace('[', '').replace(']', '')}"></td>
-                                        <! Редактирование пользоавтелей пользователей>
+                                        <!-- Редактирование пользоавтелей пользователей-->
                                         <td>
                                             <button type="button" class="btn btn-info"
                                                     data-bs-toggle="modal"
@@ -174,7 +173,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <! Удаление пользователей>
+                                        <!-- Удаление пользователей-->
                                         <td>
                                             <button type="button" class="btn btn-danger"
                                                     data-bs-toggle="modal"
@@ -272,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <! Добавление нового пользователя>
+                    <!-- Добавление нового пользователя-->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="card">
                             <div class="card-header">
@@ -280,7 +279,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="container mt-2 col-sm-4 text-center">
-                                    <form th:action="@{/admin}" th:method="POST" th:object="${newUser}">
+                                    <form th:action="@{/admin/addNewUser}" th:method="POST" th:object="${newUser}">
                                         <div class="form-group">
                                             <label for="newFirstName"><strong>First name</strong></label>
                                             <input type="text" class="form-control"
@@ -325,7 +324,7 @@
                     </div>
                 </div>
             </div>
-            <! Таблица текущего пользователя>
+            <!-- Таблица текущего пользователя-->
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="profile-tab">
                 <br>
                 <h2>User information-page</h2>
