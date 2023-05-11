@@ -7,6 +7,9 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.model.Role;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class CreateUser implements CommandLineRunner {
     private final UserService userService;
@@ -26,11 +29,15 @@ public class CreateUser implements CommandLineRunner {
         User user1 = new User("user", "surname", 25, "user@mail.ru", "user");
         // логин = admin пароль = admin
         User admin1 = new User("admin", "surname", 26, "admin@mail.ru", "admin");
+        Set<Role> roleTwo = new HashSet<>();
+        roleTwo.add(roleUser);
+        roleTwo.add(roleAdmin);
+        Set<Role> roleOne = new HashSet<>();
+        roleOne.add(roleUser);
         roleService.saveRole(roleUser);
         roleService.saveRole(roleAdmin);
-        user1.setRole(roleUser);
-        admin1.setRole(roleAdmin);
-        admin1.setRole(roleUser);
+        user1.setRoles(roleOne);
+        admin1.setRoles(roleTwo);
         userService.saveUsers(user1);
         userService.saveUsers(admin1);
     }
