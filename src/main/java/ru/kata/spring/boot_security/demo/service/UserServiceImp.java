@@ -65,7 +65,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User getUserByName(String name) {
-        return userRepositories.getUserByName(name);
+        return userRepositories.getUserByFirstName(name);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImp implements UserService {
             throw new UsernameNotFoundException(String.format("User '%s' not found", email));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
