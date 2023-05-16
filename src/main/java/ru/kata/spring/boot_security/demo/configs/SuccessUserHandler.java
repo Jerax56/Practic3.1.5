@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+
 @Component
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
     @Override
@@ -19,6 +20,7 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
             httpServletResponse.sendRedirect("/admin");
         } else if (roles.contains("ROLE_USER")) {
             httpServletResponse.sendRedirect("/user");
+
         } else {
             httpServletResponse.sendRedirect("/");
         }

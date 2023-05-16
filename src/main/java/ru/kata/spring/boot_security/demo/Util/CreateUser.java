@@ -34,11 +34,11 @@ public class CreateUser implements CommandLineRunner {
         roleTwo.add(roleAdmin);
         Set<Role> roleOne = new HashSet<>();
         roleOne.add(roleUser);
-        roleService.saveRole(roleUser);
-        roleService.saveRole(roleAdmin);
+        roleService.addRole(roleUser);
+        roleService.addRole(roleAdmin);
         user1.setRoles(roleOne);
         admin1.setRoles(roleTwo);
-        userService.saveUsers(user1);
-        userService.saveUsers(admin1);
+        userService.addUser(user1);
+        userService.addUser(admin1);
     }
 }
